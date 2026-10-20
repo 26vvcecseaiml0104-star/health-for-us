@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareConnect — Smart Healthcare Access Portal | Team TECH NOVA</title>
+  <meta name="description" content="CareConnect is a modern healthcare access portal developed by Team TECH NOVA. Discover trusted doctors, request appointments, manage medications, and consult CareBot AI." />
+  <meta name="theme-color" content="#0F766E" />
+
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230F766E'><path d='M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z'/></svg>" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       Accessibility Top Bar
+       ====================================================================== -->
+  <aside class="accessibility-bar" aria-label="Accessibility & Emergency Bar">
+    <div class="flex items-center gap-3">
+      <span class="emergency-pill">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"/></svg>
+        EMERGENCY: 911 / 112
+      </span>
+      <span>If facing a life-threatening crisis, seek urgent emergency care immediately.</span>
+    </div>
+
+    <div class="a11y-controls">
+      <span style="color: #94A3B8; font-size: 0.75rem;">Text Size:</span>
+      <button class="a11y-btn a11y-font-btn active" data-size="standard" title="Standard font size">A</button>
+      <button class="a11y-btn a11y-font-btn" data-size="large" title="Large font size">A+</button>
+      <button class="a11y-btn a11y-font-btn" data-size="xlarge" title="Extra Large font size (Senior-friendly)">A++</button>
+      <span style="color: rgba(255,255,255,0.2);">|</span>
+      <button class="a11y-btn" id="btn-toggle-contrast" title="High Contrast Mode">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 0 20Z"></path></svg>
+        Contrast
+      </button>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       Top Navigation Bar
+       ====================================================================== -->
+  <header class="navbar" id="site-header">
+    <div class="navbar-container">
+      <a href="#home" class="brand-link" aria-label="CareConnect Homepage">
+        <div class="brand-logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5v6"></path><path d="M9 8h6"></path></svg>
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">Care<span>Connect</span></span>
+          <span class="brand-team">by Team TECH NOVA</span>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#find-doctors" class="nav-link">Find Doctors</a></li>
+          <li><a href="#appointments" class="nav-link">Appointments</a></li>
+          <li><a href="#medications" class="nav-link">Medication Reminders</a></li>
+          <li><a href="#carebot" class="nav-link">Health Assistant</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Auth container dynamically rendered by auth.js -->
+        <div id="nav-auth-container"></div>
+        <button class="nav-mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       Main Content
+       ====================================================================== -->
+  <main class="site-main" id="home">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div class="hero-content">
+            <div class="hero-team-badge">
+              <span>★</span> Team TECH NOVA • Smart Healthcare Access Portal
+            </div>
+
+            <h1 class="hero-title">
+              Your Health, Connected. <br />
+              <span class="highlight">Care Made Simpler.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Find trusted healthcare services, manage appointments, and get reliable health information — all in one place.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#find-doctors" class="btn btn-primary btn-lg" id="btn-hero-find-doctor">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Find a Doctor
+              </a>
+              <a href="#carebot" class="btn btn-secondary btn-lg" id="btn-hero-carebot">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Explore Health Assistant
+              </a>
+            </div>
+
+            <!-- Quick Search Bar in Hero -->
+            <div class="hero-search-card">
+              <div class="hero-search-header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Quick Provider Search
+              </div>
+              <form class="hero-search-form" id="hero-search-form">
+                <div class="input-with-icon">
+                  <span class="input-icon">🩺</span>
+                  <input type="text" id="hero-search-query" class="form-input" placeholder="Doctor, condition, or specialty..." />
+                </div>
+                <div class="input-with-icon">
+                  <span class="input-icon">🏥</span>
+                  <select id="hero-search-specialty" class="form-select">
+                    <option value="All">All Specialties</option>
+                    <option value="General Medicine">General Medicine</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Mental Health">Mental Health</option>
+                  </select>
+                </div>
+                <div>
+                  <select id="hero-search-mode" class="form-select">
+                    <option value="All">All Visit Modes</option>
+                    <option value="in-person">In-Person</option>
+                    <option value="video">Video Telehealth</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-hero-search-submit">Search</button>
+              </form>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="hero-trust-badges">
+              <div class="hero-trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Verified Demonstration Records
+              </div>
+              <div class="hero-trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Zero Booking Confusion
+              </div>
+              <div class="hero-trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Elderly-Accessible UI
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Media Visual -->
+          <div class="hero-media-wrapper">
+            <div class="hero-image-frame">
+              <img src="assets/images/hero_banner.jpg" alt="Compassionate healthcare professionals caring for patients in a bright clinic" />
+            </div>
+
+            <!-- Floating Stat 1 -->
+            <div class="floating-stat-card stat-card-1">
+              <div class="stat-icon teal">🩺</div>
+              <div>
+                <div class="stat-label">Provider Satisfaction</div>
+                <div class="stat-value">4.9 / 5.0 Rating</div>
+              </div>
+            </div>
+
+            <!-- Floating Stat 2 -->
+            <div class="floating-stat-card stat-card-2">
+              <div class="stat-icon amber">🤖</div>
+              <div>
+                <div class="stat-label">AI Health Assistant</div>
+                <div class="stat-value">CareBot 24/7 Triage</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Healthcare Service Categories
+         ====================================================================== -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Clinical Disciplines</span>
+          <h2 class="section-title">Specialized Healthcare for Every Need</h2>
+          <p class="section-subtitle">Discover board-certified specialists, general physicians, and digital consultation options tailored to you.</p>
+        </div>
+
+        <div class="categories-grid" id="categories-grid-container">
+          <!-- Dynamically populated from doctors.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         How It Works Section (3-Step Guide)
+         ====================================================================== -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Simple & Seamless</span>
+          <h2 class="section-title">How CareConnect Works</h2>
+          <p class="section-subtitle">Three easy steps designed for students, busy professionals, families, and seniors alike.</p>
+        </div>
+
+        <div class="steps-grid">
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Discover & Compare Providers</h3>
+            <p>Filter by specialty, distance, consultation type (in-person or video), and transparent fees. View authentic clinic credentials and patient feedback.</p>
+            <div style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600; margin-top: auto;">
+              ✓ Curated demonstration dataset
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Request Your Preferred Slot</h3>
+            <p>Select an available date and time without overlapping conflicts. Your booking request is logged as <strong>Pending Confirmation</strong> until verified by clinic staff.</p>
+            <div style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600; margin-top: auto;">
+              ✓ Conflict-checked scheduling
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Track Health & Reminders</h3>
+            <p>Manage upcoming visits, download <code>.ics</code> calendar invitations, track daily medication adherence, and ask CareBot general health questions anytime.</p>
+            <div style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600; margin-top: auto;">
+              ✓ Audio-guided CareBot AI
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Find Doctors & Healthcare Facilities Section
+         ====================================================================== -->
+    <section class="section section-alt" id="find-doctors">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Provider Directory</span>
+          <h2 class="section-title">Find Doctors & Healthcare Facilities</h2>
+          <p class="section-subtitle">Search licensed practitioners, community clinics, and telehealth providers with genuine booking options.</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="directory-controls">
+          <div class="filters-row">
+            <div class="input-with-icon">
+              <span class="input-icon">🔍</span>
+              <input type="text" id="doctor-search-input" class="form-input" placeholder="Search by doctor name, specialty, clinic, or condition..." />
+            </div>
+            <div>
+              <select id="doctor-specialty-select" class="form-select">
+                <option value="All">All Specialties</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Mental Health">Mental Health</option>
+              </select>
+            </div>
+            <div>
+              <select id="doctor-facility-select" class="form-select">
+                <option value="All">All Facility Types</option>
+                <option value="Community Clinic">Community Clinic</option>
+                <option value="Multi-Specialty Hospital">Multi-Specialty Hospital</option>
+                <option value="Specialty Center">Specialty Center</option>
+                <option value="Telehealth Center">Telehealth Center</option>
+              </select>
+            </div>
+            <div>
+              <select id="doctor-mode-select" class="form-select">
+                <option value="All">All Care Modes</option>
+                <option value="in-person">In-Person Visits</option>
+                <option value="video">Video Telehealth</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="secondary-filters">
+            <div class="quick-filter-chips">
+              <span style="font-size: var(--font-xs); font-weight: 700; color: var(--color-text-muted);">Quick Specialties:</span>
+              <button class="filter-chip active" data-specialty="All">All</button>
+              <button class="filter-chip" data-specialty="General Medicine">General Medicine</button>
+              <button class="filter-chip" data-specialty="Cardiology">Cardiology</button>
+              <button class="filter-chip" data-specialty="Pediatrics">Pediatrics</button>
+              <button class="filter-chip" data-specialty="Dermatology">Dermatology</button>
+              <button class="filter-chip" data-specialty="Orthopedics">Orthopedics</button>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <label for="doctor-sort-select" style="font-size: var(--font-xs); font-weight: 600; color: var(--color-text-secondary);">Sort:</label>
+              <select id="doctor-sort-select" class="form-select" style="width: auto; padding: 0.35rem 0.85rem; font-size: var(--font-xs);">
+                <option value="recommended">Recommended</option>
+                <option value="fee-low">Consultation Fee (Low to High)</option>
+                <option value="rating">Highest Patient Rating</option>
+                <option value="experience">Years of Experience</option>
+              </select>
+              <button class="btn btn-subtle btn-sm" id="btn-reset-filters">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="doctor-count-banner">
+          <span id="doctor-results-count" style="font-weight: 700; color: var(--color-text-main); font-size: var(--font-sm);">Showing verified healthcare providers</span>
+          <span class="demo-data-note">
+            ⚠️ Demonstration Data: Realistic sample records for functional MVP evaluation.
+          </span>
+        </div>
+
+        <!-- Doctors Grid -->
+        <div class="doctors-grid" id="doctors-grid-container">
+          <!-- Populated by doctors.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Appointment Management Dashboard
+         ====================================================================== -->
+    <section class="section" id="appointments">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Schedule & Care Coordination</span>
+          <h2 class="section-title">My Healthcare Appointments</h2>
+          <p class="section-subtitle">Review booking requests, track clinic confirmation statuses, download calendar events, or reschedule visits.</p>
+        </div>
+
+        <div class="appointments-dashboard">
+          
+          <!-- Clinic Simulator Notice for Reviewers -->
+          <div class="clinic-simulator-bar">
+            <div class="simulator-info">
+              <span style="font-size: 1.25rem;">🩺</span>
+              <div>
+                <strong>Clinic Coordinator Testing Suite:</strong>
+                <span style="color: #92400E; margin-left: 4px;">In this functional MVP, you can simulate clinic staff confirming pending requests or completing visits via the action buttons on each card.</span>
+              </div>
+            </div>
+            <a href="#find-doctors" class="btn btn-primary btn-sm nav-hash-trigger">+ New Appointment Request</a>
+          </div>
+
+          <!-- Status Tabs -->
+          <div class="tabs-nav" role="tablist">
+            <button class="tab-btn appointment-tab-btn active" data-tab="all" role="tab">
+              All Requests <span class="tab-count" id="count-tab-all">0</span>
+            </button>
+            <button class="tab-btn appointment-tab-btn" data-tab="upcoming" role="tab">
+              Upcoming <span class="tab-count" id="count-tab-upcoming">0</span>
+            </button>
+            <button class="tab-btn appointment-tab-btn" data-tab="pending" role="tab">
+              Pending Confirmation <span class="tab-count" id="count-tab-pending">0</span>
+            </button>
+            <button class="tab-btn appointment-tab-btn" data-tab="confirmed" role="tab">
+              Confirmed <span class="tab-count" id="count-tab-confirmed">0</span>
+            </button>
+            <button class="tab-btn appointment-tab-btn" data-tab="completed" role="tab">
+              Completed <span class="tab-count" id="count-tab-completed">0</span>
+            </button>
+            <button class="tab-btn appointment-tab-btn" data-tab="cancelled" role="tab">
+              Cancelled <span class="tab-count" id="count-tab-cancelled">0</span>
+            </button>
+          </div>
+
+          <!-- Appointments List -->
+          <div class="appointments-list" id="appointments-list-container">
+            <!-- Dynamically populated by appointments.js -->
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Medication Reminders & Healthcare Schedules
+         ====================================================================== -->
+    <section class="section section-alt" id="medications">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Health Organization</span>
+          <h2 class="section-title">Medication Reminders & Adherence</h2>
+          <p class="section-subtitle">Never miss a dose. Track prescription schedules, mark daily intake, and maintain your personal adherence streak.</p>
+        </div>
+
+        <div class="medication-dashboard-grid">
+          
+          <!-- Left Column: Active Medications & Checklist -->
+          <div>
+            <!-- Stats Row -->
+            <div class="medication-hero-stats">
+              <div class="stat-metric-card">
+                <div class="stat-metric-icon green">📊</div>
+                <div>
+                  <div style="font-size: var(--font-xs); color: var(--color-text-muted);">Today's Adherence</div>
+                  <div style="font-size: var(--font-xl); font-weight: 800; color: var(--color-text-main);" id="med-stat-adherence">100%</div>
+                </div>
+              </div>
+
+              <div class="stat-metric-card">
+                <div class="stat-metric-icon amber">⏰</div>
+                <div>
+                  <div style="font-size: var(--font-xs); color: var(--color-text-muted);">Pending Doses</div>
+                  <div style="font-size: var(--font-xl); font-weight: 800; color: var(--color-text-main);" id="med-stat-pending">0 doses</div>
+                </div>
+              </div>
+
+              <div class="stat-metric-card">
+                <div class="stat-metric-icon teal">🔥</div>
+                <div>
+                  <div style="font-size: var(--font-xs); color: var(--color-text-muted);">Current Streak</div>
+                  <div style="font-size: var(--font-xl); font-weight: 800; color: var(--color-text-main);" id="med-stat-streak">5 days 🔥</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Header with Add Button -->
+            <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+              <h3 style="font-size: var(--font-lg);">Daily Dosage Checklist</h3>
+              <div class="flex items-center gap-2">
+                <button class="btn btn-outline btn-sm" id="btn-test-med-alert" title="Test audio & visual alert chime">
+                  🔔 Test Alert Chime
+                </button>
+                <button class="btn btn-primary btn-sm" id="btn-open-add-med">
+                  + Add Medication
+                </button>
+              </div>
+            </div>
+
+            <!-- List Container -->
+            <div class="medication-list" id="medication-list-container">
+              <!-- Dynamically populated by medications.js -->
+            </div>
+          </div>
+
+          <!-- Right Column: Senior & Family Helper Card -->
+          <div>
+            <div class="card" style="background: linear-gradient(135deg, #F0FDFA, #FFFFFF); border-color: var(--color-primary-subtle);">
+              <div class="flex items-center gap-3" style="margin-bottom: 1rem;">
+                <div style="width: 42px; height: 42px; border-radius: var(--radius-md); background: var(--color-primary); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                  👵
+                </div>
+                <div>
+                  <h4 style="font-size: var(--font-base);">Senior & Family Friendly</h4>
+                  <span style="font-size: var(--font-xs); color: var(--color-text-muted);">Safe medication guidelines</span>
+                </div>
+              </div>
+
+              <p style="font-size: var(--font-xs); color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                Taking medications as prescribed prevents complications and hospital readmissions. Use high contrast mode or larger text if needed.
+              </p>
+
+              <div style="background-color: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1.25rem; font-size: var(--font-xs);">
+                <strong>Safety Quick Tips:</strong>
+                <ul style="padding-left: 1.15rem; margin-top: 0.35rem; color: var(--color-text-secondary); line-height: 1.5;">
+                  <li>Keep medications in original labeled containers.</li>
+                  <li>Store away from humid bathrooms.</li>
+                  <li>Check with your pharmacist before crushing tablets.</li>
+                </ul>
+              </div>
+
+              <button class="btn btn-outline btn-full btn-sm" id="btn-print-med-schedule">
+                🖨️ Print Medication Schedule
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         AI Health Information Assistant (CareBot)
+         ====================================================================== -->
+    <section class="section" id="carebot">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">AI-Powered Health Companion</span>
+          <h2 class="section-title">CareBot Health Information Assistant</h2>
+          <p class="section-subtitle">Get instant, reliable answers on symptom evaluation, lab test preparation, lifestyle wellness, and medical questions to ask your physician.</p>
+        </div>
+
+        <div class="carebot-wrapper">
+          <!-- Header -->
+          <div class="carebot-header">
+            <div class="carebot-header-info">
+              <div class="carebot-avatar">🤖</div>
+              <div class="carebot-header-titles">
+                <h3>CareBot Health Assistant</h3>
+                <p>Evidence-based educational assistant • Team TECH NOVA</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="btn btn-subtle btn-sm" id="btn-stop-speech" style="color: #FFFFFF; background: rgba(255,255,255,0.2);" title="Mute speech">
+                ⏹ Stop Audio
+              </button>
+              <button class="btn btn-subtle btn-sm" id="btn-clear-chat" style="color: #FFFFFF; background: rgba(255,255,255,0.2);">
+                Reset Chat
+              </button>
+            </div>
+          </div>
+
+          <!-- Medical Disclaimer Banner -->
+          <div class="carebot-disclaimer-banner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"/></svg>
+            <div>
+              <strong>Educational Health Assistant:</strong> CareBot does not diagnose diseases or provide medical treatment. For severe or sudden symptoms (chest pain, shortness of breath, numbness), call 911 immediately.
+            </div>
+          </div>
+
+          <!-- Messages Body -->
+          <div class="carebot-messages" id="carebot-messages">
+            <!-- Messages populated by carebot.js -->
+          </div>
+
+          <!-- Suggested Prompt Pills -->
+          <div class="carebot-suggested-prompts" id="carebot-prompt-pills">
+            <!-- Pills rendered by carebot.js -->
+          </div>
+
+          <!-- Input Form -->
+          <form class="carebot-input-form" id="carebot-form">
+            <input type="text" id="carebot-input" class="carebot-input-field" placeholder="Ask about symptoms, preparing for tests, managing blood pressure..." autocomplete="off" />
+            <button type="submit" class="btn btn-primary" id="btn-carebot-send">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              <span>Ask CareBot</span>
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Platform Benefits & About Section
+         ====================================================================== -->
+    <section class="section section-alt" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Designed for Real Impact</span>
+          <h2 class="section-title">Built for Real-World Healthcare Accessibility</h2>
+          <p class="section-subtitle">Bridging the gap between patients, reliable clinical providers, and daily wellness management.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6" style="margin-bottom: 3rem;">
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 0.75rem;">🛡️</div>
+            <h3 style="font-size: var(--font-lg); margin-bottom: 0.5rem;">Transparent & Reliable</h3>
+            <p style="font-size: var(--font-sm);">Never misleads users with fake confirmation claims. All demonstration records are marked clearly, and appointments follow genuine clinic verification flows.</p>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 0.75rem;">♿</div>
+            <h3 style="font-size: var(--font-lg); margin-bottom: 0.5rem;">Senior & Family Accessible</h3>
+            <p style="font-size: var(--font-sm);">High-contrast color profiles, multi-tier text magnification, intuitive schedules, and text-to-speech audio support elderly and visually impaired users.</p>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 0.75rem;">🔒</div>
+            <h3 style="font-size: var(--font-lg); margin-bottom: 0.5rem;">Protected Private Data</h3>
+            <p style="font-size: var(--font-sm);">User data isolation guarantees that appointments and medication schedules are visible only to the authenticated patient account, adhering to privacy standards.</p>
+          </div>
+        </div>
+
+        <div style="background-color: var(--color-primary-50); border: 1px solid var(--color-primary-subtle); border-radius: var(--radius-xl); padding: 2rem; text-align: center;">
+          <h3 style="font-size: var(--font-xl); color: var(--color-primary-dark); margin-bottom: 0.5rem;">Developed by Team TECH NOVA</h3>
+          <p style="max-width: 650px; margin: 0 auto 1.5rem auto; font-size: var(--font-sm); color: var(--color-text-secondary);">
+            CareConnect was created to address healthcare fragmentation, appointment confusion, and medication non-adherence through human-centered software and assistive artificial intelligence.
+          </p>
+          <div class="flex items-center justify-center gap-3">
+            <a href="#find-doctors" class="btn btn-primary btn-sm">Discover Providers</a>
+            <a href="#carebot" class="btn btn-outline btn-sm">Talk to CareBot</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       Site Footer
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <h4>CareConnect</h4>
+          <p>
+            Smart Healthcare Access Portal developed by <strong>Team TECH NOVA</strong>. Connecting patients to trusted healthcare, simplified booking, and 24/7 assistive health guidance.
+          </p>
+          <div style="margin-top: 1.25rem;">
+            <button class="btn btn-outline btn-sm" id="btn-reset-demo-data" style="color: #94A3B8; border-color: rgba(255,255,255,0.2);">
+              🔄 Reset Initial Demo Data
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Navigation</h5>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#find-doctors">Find Doctors</a></li>
+            <li><a href="#appointments">Appointments Hub</a></li>
+            <li><a href="#medications">Medication Reminders</a></li>
+            <li><a href="#carebot">CareBot Health Assistant</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Legal & Disclaimers</h5>
+          <ul class="footer-links">
+            <li><a href="#" id="btn-footer-disclaimer">Medical Disclaimer</a></li>
+            <li><a href="#" id="btn-footer-privacy">Privacy Policy</a></li>
+            <li><a href="mailto:support@tech-nova.careconnect.portal">Contact Team TECH NOVA</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Medical Disclaimer</h5>
+          <div class="footer-disclaimer-box">
+            CareConnect is an informational access portal and does not furnish medical diagnoses or emergency triage. For emergency health situations, contact 911 or visit the nearest emergency facility.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 CareConnect — Developed by Team TECH NOVA. All rights reserved.</div>
+        <div class="flex items-center gap-3">
+          <span>Healthcare Technology & Artificial Intelligence</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       MODALS
+       ====================================================================== -->
+
+  <!-- 1. Request Appointment Booking Modal -->
+  <div class="modal-backdrop" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="booking-modal-title">Request Healthcare Appointment</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="booking-form">
+        <div class="modal-body">
+          <div style="background-color: #FEF3C7; border: 1px solid #FDE68A; padding: 0.65rem 1rem; border-radius: var(--radius-md); font-size: var(--font-xs); color: #92400E; margin-bottom: 1.25rem;">
+            📌 <strong>Scheduling Notice:</strong> Submitting this request sends your preferred slot to the clinic coordinator. Your appointment status will be marked <strong>Pending Confirmation</strong> until verified.
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="book-doctor-select">Selected Healthcare Provider <span class="required">*</span></label>
+            <select id="book-doctor-select" class="form-select" required>
+              <!-- Populated by appointments.js -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="book-mode-select">Consultation Mode <span class="required">*</span></label>
+            <select id="book-mode-select" class="form-select" required>
+              <option value="in-person">🏥 In-Person Clinic Visit</option>
+              <option value="video">💻 Video Telehealth Consult</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="book-date-input">Select Date <span class="required">*</span></label>
+            <input type="date" id="book-date-input" class="form-input" required />
+            <div class="form-help">Past dates cannot be selected.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Available Time Slots <span class="required">*</span></label>
+            <div class="flex items-center gap-2" style="flex-wrap: wrap;" id="book-slots-container">
+              <!-- Radio slots dynamically injected -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="book-reason-input">Reason for Visit (Optional)</label>
+            <textarea id="book-reason-input" class="form-textarea" rows="2" placeholder="e.g. Annual physical, ongoing cough, blood pressure review..."></textarea>
+          </div>
+
+          <div style="background-color: var(--color-surface-alt); padding: 0.85rem 1rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: var(--font-xs); color: var(--color-text-secondary); font-weight: 600;">Estimated Consultation Fee:</span>
+            <strong style="color: var(--color-primary-dark); font-size: var(--font-sm);" id="book-summary-fee">$120</strong>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-booking">Submit Appointment Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Reschedule Appointment Modal -->
+  <div class="modal-backdrop" id="reschedule-modal" role="dialog" aria-modal="true" aria-labelledby="reschedule-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="reschedule-modal-title">Reschedule Appointment</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="reschedule-form">
+        <input type="hidden" id="reschedule-apt-id" />
+        <div class="modal-body">
+          <div style="background-color: var(--color-surface-alt); padding: 0.85rem 1rem; border-radius: var(--radius-md); font-size: var(--font-xs); margin-bottom: 1.25rem;" id="reschedule-doctor-info">
+            <!-- Doctor name and current slot injected here -->
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reschedule-date-input">Choose New Date <span class="required">*</span></label>
+            <input type="date" id="reschedule-date-input" class="form-input" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Available Time Slots <span class="required">*</span></label>
+            <div class="flex items-center gap-2" style="flex-wrap: wrap;" id="reschedule-slots-container">
+              <!-- Slots injected here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Reschedule Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Provider Detailed Profile Modal -->
+  <div class="modal-backdrop" id="provider-profile-modal" role="dialog" aria-modal="true" aria-labelledby="provider-profile-title">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="provider-profile-title">Doctor Profile</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" id="provider-profile-body">
+        <!-- Dynamically injected by doctors.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. User Authentication Modal (Sign In / Register) -->
+  <div class="modal-backdrop" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="auth-modal-title">CareConnect Portal Access</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div style="padding: 1rem 1.75rem 0 1.75rem;">
+        <!-- Quick Demo Switcher Banner -->
+        <div style="background: linear-gradient(135deg, #F0FDFA, #E0F2FE); border: 1px solid #BAE6FD; padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
+          <div style="font-size: var(--font-xs); font-weight: 700; color: var(--color-primary-dark); margin-bottom: 0.35rem;">
+            ⚡ Quick Evaluation Demo Logins:
+          </div>
+          <div class="flex items-center gap-2" style="flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary btn-sm demo-login-btn" data-demo-email="sarah.jenkins@example.com">
+              👤 Sarah Jenkins (Professional)
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm demo-login-btn" data-demo-email="robert.chen@example.com">
+              👴 Robert Chen (Elderly)
+            </button>
+          </div>
+        </div>
+
+        <div class="tabs-nav" style="margin-bottom: 1rem;">
+          <button class="tab-btn auth-tab-btn active" data-target="login-panel">Sign In</button>
+          <button class="tab-btn auth-tab-btn" data-target="register-panel">Create Account</button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding-top: 0.5rem;">
+        <!-- Login Panel -->
+        <div class="auth-form-panel active" id="login-panel">
+          <form id="login-form">
+            <div class="form-group">
+              <label class="form-label" for="login-email">Email Address</label>
+              <input type="email" id="login-email" class="form-input" value="sarah.jenkins@example.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="login-password">Password</label>
+              <input type="password" id="login-password" class="form-input" value="Password123!" required />
+            </div>
+            <div class="form-error" id="login-error"></div>
+            <button type="submit" class="btn btn-primary btn-full" style="margin-top: 1rem;">Sign In</button>
+          </form>
+        </div>
+
+        <!-- Register Panel -->
+        <div class="auth-form-panel" id="register-panel" style="display: none;">
+          <form id="register-form">
+            <div class="form-group">
+              <label class="form-label" for="reg-name">Full Name <span class="required">*</span></label>
+              <input type="text" id="reg-name" class="form-input" placeholder="e.g. Maria Gonzalez" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-email">Email Address <span class="required">*</span></label>
+              <input type="email" id="reg-email" class="form-input" placeholder="maria@example.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-password">Password <span class="required">*</span></label>
+              <input type="password" id="reg-password" class="form-input" placeholder="At least 6 characters" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-phone">Phone Number (Optional)</label>
+              <input type="tel" id="reg-phone" class="form-input" placeholder="(206) 555-0199" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-location">Preferred Location</label>
+              <input type="text" id="reg-location" class="form-input" placeholder="e.g. Seattle, WA" />
+            </div>
+            <div class="form-error" id="reg-error"></div>
+            <button type="submit" class="btn btn-primary btn-full" style="margin-top: 1rem;">Create Patient Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. User Profile & Healthcare Preferences Modal -->
+  <div class="modal-backdrop" id="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="profile-modal-title">My Profile & Healthcare Preferences</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="profile-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="profile-name">Full Name</label>
+            <input type="text" id="profile-name" class="form-input" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-email">Email Address (Read-only)</label>
+            <input type="email" id="profile-email" class="form-input" disabled style="background-color: var(--color-surface-alt);" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-phone">Phone Number</label>
+            <input type="tel" id="profile-phone" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-location">City / Preferred Location</label>
+            <input type="text" id="profile-location" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-pref-mode">Preferred Consultation Mode</label>
+            <select id="profile-pref-mode" class="form-select">
+              <option value="in-person">In-Person Clinic Visits</option>
+              <option value="video">Video Telehealth</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-pref-notify">Notification Preference</label>
+            <select id="profile-pref-notify" class="form-select">
+              <option value="email">Email Notifications</option>
+              <option value="sms">SMS Text Messages</option>
+            </select>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-border); padding-top: 1rem; margin-top: 1rem;">
+            <div style="font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.5rem;">Emergency Contact</div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="form-label" for="profile-emergency-name" style="font-size: var(--font-xs);">Contact Name</label>
+                <input type="text" id="profile-emergency-name" class="form-input" placeholder="Name & relation" />
+              </div>
+              <div>
+                <label class="form-label" for="profile-emergency-phone" style="font-size: var(--font-xs);">Phone</label>
+                <input type="tel" id="profile-emergency-phone" class="form-input" placeholder="(xxx) xxx-xxxx" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Preferences</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. Add Medication Modal -->
+  <div class="modal-backdrop" id="add-med-modal" role="dialog" aria-modal="true" aria-labelledby="add-med-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="add-med-title">Add Medication Reminder</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="add-med-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="med-name">Medication Name <span class="required">*</span></label>
+            <input type="text" id="med-name" class="form-input" placeholder="e.g. Lisinopril, Metformin, Vitamin D3" required />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="form-group">
+              <label class="form-label" for="med-dosage">Dosage <span class="required">*</span></label>
+              <input type="text" id="med-dosage" class="form-input" placeholder="e.g. 10 mg, 1 tablet" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="med-frequency">Frequency</label>
+              <select id="med-frequency" class="form-select">
+                <option value="Once Daily">Once Daily</option>
+                <option value="Twice Daily">Twice Daily</option>
+                <option value="Three Times Daily">Three Times Daily</option>
+                <option value="Every 8 Hours">Every 8 Hours</option>
+                <option value="As Needed">As Needed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="med-time">Scheduled Reminder Time</label>
+            <input type="text" id="med-time" class="form-input" placeholder="e.g. 08:00 AM" value="08:00 AM" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="med-instructions">Special Instructions</label>
+            <input type="text" id="med-instructions" class="form-input" placeholder="e.g. Take with food, with plenty of water, at bedtime" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="med-condition">Health Condition / Prescribed For</label>
+            <input type="text" id="med-condition" class="form-input" placeholder="e.g. Blood pressure regulation, cholesterol" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add to Schedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. Medical Disclaimer Modal -->
+  <div class="modal-backdrop" id="disclaimer-modal" role="dialog" aria-modal="true" aria-labelledby="disclaimer-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="disclaimer-title">CareConnect Medical Disclaimer</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" style="font-size: var(--font-sm); line-height: 1.6; color: var(--color-text-secondary);">
+        <p><strong>1. Informational Purpose Only:</strong> The CareConnect portal and the CareBot AI assistant provide educational and informational resources. They are not intended as clinical diagnostic engines or substitutes for direct physician evaluation.</p>
+        <p><strong>2. Emergency Triage:</strong> If you are experiencing symptoms of a medical emergency — including acute chest pressure, stroke symptoms, uncontrolled bleeding, or respiratory arrest — immediately call 911 or visit the nearest emergency facility.</p>
+        <p><strong>3. Demonstration Records:</strong> In this MVP release by Team TECH NOVA, healthcare provider records and facility profiles are realistic curated demonstration data to evaluate scheduling workflows safely.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary modal-close-trigger">I Understand</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Privacy Policy Modal -->
+  <div class="modal-backdrop" id="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="privacy-title">CareConnect Privacy Policy</h3>
+        <button class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" style="font-size: var(--font-sm); line-height: 1.6; color: var(--color-text-secondary);">
+        <p><strong>Patient Data Privacy:</strong> CareConnect is designed with patient confidentiality at its core. User appointments and medication schedules are strictly isolated to authenticated user accounts.</p>
+        <p><strong>Minimal Data Collection:</strong> In accordance with healthcare best practices, we collect only necessary scheduling data and do not solicit sensitive, unnecessary medical records.</p>
+        <p><strong>Local Control:</strong> Demonstration session data is maintained securely on your client browser, allowing full user control to update or reset records at any time.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary modal-close-trigger">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Entry Point -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
